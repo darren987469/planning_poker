@@ -21,4 +21,14 @@ Things you may want to cover:
 
 * Deployment instructions
 
+```sh
+git push heroku master # master is the branch name
+
+heroku run bash # connect to heroku interactive shell
+heroku open # open the app
+heroku logs --tail # check logs
+```
+
+Heroku guide: https://devcenter.heroku.com/articles/getting-started-with-rails6
+
 * ...
