@@ -40,6 +40,28 @@ describe '/games', type: :request do
         subject
         expect(response).to be_successful
       end
+
+      it 'creates a vote to associate the user and the game' do
+        expect { subject }.to change(Vote, :count).by(1)
+        expect(Vote.last).to have_attributes(
+          user_id: user.id,
+          game_id: game.id
+        )
+      end
+
+      it 'broadcasts to notify there is a new user join the game' do
+        expect {
+          subject
+        }.to have_broadcasted_to("game_#{game.id}")
+      end
+
+      context 'the user already has association with the game' do
+        let!(:vote) { create(:vote, game: game, user: user) }
+
+        it 'won\'t create a vote to associate the user and the game' do
+          expect { subject }.to change(Vote, :count).by(0)
+        end
+      end
     end
   end
 

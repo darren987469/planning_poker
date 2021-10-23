@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Votes</h3>
-    <p>Hi, {{user.name}}, user_id: {{user.id}}</p>
+    <h3>Hi, {{user.name}}, user_id: {{user.id}}</h3>
     <table>
       <thead>
         <tr>
@@ -109,6 +109,7 @@ export default {
       var event = {
         type: 'update_vote',
         params: {
+          game: { id: this.game.id },
           vote: { id: this.currentVote().id, value: value },
           user: { id: this.user.id }
         }
@@ -146,10 +147,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
