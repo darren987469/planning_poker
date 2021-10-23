@@ -16,7 +16,7 @@
       <tr>
         <td><%= game.name %></td>
         <td><%= game.code %></td>
-        <td><%= link_to 'Show', game %></td>
+        <td><%= link_to 'Show', game_url(game.code) %></td>
       </tr>
     <% end %>
   </tbody>
