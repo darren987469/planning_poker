@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   end
 
   if Rails.env.production?
-    rescue_from StandardError do
+    rescue_from StandardError do |e|
+      Rollbar.error(e)
       render file: "#{Rails.root}/public/500.html",  layout: false, status: :internal_server_error
     end
   end
