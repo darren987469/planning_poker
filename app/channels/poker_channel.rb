@@ -1,26 +1,24 @@
 class PokerChannel < ApplicationCable::Channel
   def subscribed
-    stream_from stream_key(params.dig(:game, :id))
-  end
-
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
-  end
-
-  def receive(event)
+    event = {
+      type: 'user_join',
+      params: params
+    }
     service = PokerGameService.new(event)
     if service.run
-      game = service.game
-      data = { game: GameSerializer.new(game).run }
-      ActionCable.server.broadcast(stream_key(game.id), data)
-    else
-      Rails.logger.info { "onReceive error #{service.errors.full_messages.join(',')}" }
+      stream_from(service.stream_key)
     end
   end
 
-  private
+  def unsubscribed
+    event = {
+      type: 'user_leave',
+      params: params
+    }
+    PokerGameService.new(event).run
+  end
 
-  def stream_key(game_id)
-    "game_#{game_id}"
+  def receive(event)
+    PokerGameService.new(event).run
   end
 end

@@ -13,12 +13,14 @@ class GamesController < ApplicationController
     session[:game_code] = @game.code
     return redirect_to new_user_url unless current_user
 
-    unless @game.votes.where(user: current_user).exists?
-      @game.votes.create!(user: current_user)
-      # app/channels/poker_channel.rb#receive
-      data = { game: GameSerializer.new(@game).run }
-      ActionCable.server.broadcast("game_#{@game.id}", data)
-    end
+    event = {
+      type: 'user_join',
+      params: {
+        game: { id: @game.id },
+        user: { id: current_user.id }
+      }
+    }
+    PokerGameService.new(event).run
 
     @user_data = current_user.to_json
     @game_data = GameSerializer.new(@game).run.to_json

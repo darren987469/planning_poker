@@ -8,6 +8,48 @@ describe PokerGameService do
   describe '#run' do
     subject { service.run }
 
+    context 'user_join event' do
+      let(:event) do
+        {
+          type: 'user_join',
+          params: {
+            game: { id: game.id },
+            user: { id: user.id }
+          }
+        }
+      end
+
+      it 'creates an vote to associate the user and the game' do
+        expect { subject }.to change(Vote, :count).by(1)
+        expect(Vote.last).to have_attributes(
+          user_id: user.id,
+          game_id: game.id
+        )
+      end
+
+      it 'broadcasts the event result' do
+        expect { subject }.to have_broadcasted_to("game_#{game.id}")
+      end
+    end
+
+    context 'user_leave event' do
+      let(:event) do
+        {
+          type: 'user_leave',
+          params: {
+            game: { id: game.id },
+            user: { id: user.id }
+          }
+        }
+      end
+
+      before { vote } # trigger vote creation
+
+      it 'destroy an vote to unassociate the user and the game' do
+        expect { subject }.to change(Vote, :count).by(-1)
+      end
+    end
+
     context 'update_vote event' do
       let(:event) do
         {

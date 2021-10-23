@@ -61,10 +61,11 @@ export default {
   created: function() {
     this.pokerChannel = consumer.subscriptions.create({
       channel: "PokerChannel",
-      game: { id: this.game.id }
+      game: { id: this.game.id },
+      user: { id: this.user.id }
     },
     {
-      received: (data)=> {
+      received: (data) => {
         console.log(data)
         this.game = data.game
       }
