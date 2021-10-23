@@ -14,14 +14,14 @@ describe PokerGameService do
           type: 'update_vote',
           params: {
             game: { id: game.id },
-            vote: { id: vote.id, value: 3 },
+            vote: { id: vote.id, value: '3' },
             user: { id: user.id }
           }
         }
       end
 
       it 'updates the vote value' do
-        expect { subject }.to change { vote.reload.value }.from(1).to(3)
+        expect { subject }.to change { vote.reload.value }.from('1').to('3')
       end
 
       it { expect(subject).to eq true }
@@ -84,7 +84,7 @@ describe PokerGameService do
         end
 
         it 'resets all vote values' do
-          expect { subject }.to change { vote.reload.value }.from(1).to(nil)
+          expect { subject }.to change { vote.reload.value }.from('1').to(nil)
         end
       end
 

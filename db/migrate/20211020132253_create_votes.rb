@@ -3,7 +3,7 @@ class CreateVotes < ActiveRecord::Migration[6.1]
     create_table :votes do |t|
       t.bigint :game_id
       t.references :user
-      t.integer :value
+      t.string :value
 
       t.timestamps
     end

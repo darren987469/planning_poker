@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_132253) do
   create_table "votes", force: :cascade do |t|
     t.bigint "game_id"
     t.bigint "user_id"
-    t.integer "value"
+    t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id", "user_id"], name: "index_votes_on_game_id_and_user_id", unique: true
