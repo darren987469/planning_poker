@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :redirect_unless_current_suer, only: %i[show new create]
+  before_action :redirect_unless_current_suer, only: %i[new create]
   before_action :set_game, only: %i[edit update destroy]
   before_action :set_game_by_code, only: %i[show]
 
@@ -11,6 +11,10 @@ class GamesController < ApplicationController
   # GET /games/:code
   def show
     session[:game_code] = @game.code
+    redirect_to new_user_url unless current_user
+
+    @user_data = current_user.to_json
+    @game_data = GameSerializer.new(@game).run.to_json
   end
 
   # GET /games/new

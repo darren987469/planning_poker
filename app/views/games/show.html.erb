@@ -14,3 +14,7 @@
   <strong>Share the link to invite people:</strong>
   <%= link_to(game_url(@game.code), game_url(@game.code)) %>
 </p>
+
+<%= javascript_pack_tag 'games/main', 'data-turbolinks-track': 'reload' %>
+<div id="gameApp" data-user="<%= @user_data %>" data-game="<%= @game_data %>">
+</div>
