@@ -18,7 +18,7 @@ class Game < ApplicationRecord
   private
 
   def set_code
-    self.code = code || generate_code
+    self.code = code.presence || generate_code
   end
 
   def generate_code
