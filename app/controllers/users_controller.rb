@@ -11,8 +11,9 @@ class UsersController < ApplicationController
     if @user.save
       session[:current_user_id] = @user.id
 
-      if session[:game_code]
-        redirect_to game_url(session[:game_code])
+      if session[:game_code] && (game = Game.find_by(code: session[:game_code]))
+        game.votes.create(user: @user)
+        redirect_to game_url(game.code)
       else
         redirect_to new_game_url
       end

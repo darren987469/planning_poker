@@ -1,5 +1,8 @@
 class Game < ApplicationRecord
-  enum status: { not_started: 'not_started', voting: 'voting' }
+  has_many :votes
+  has_many :users, through: :votes
+
+  enum status: { not_started: 'not_started', voting: 'voting', voting_ended: 'voting_ended' }
 
   validates :name, presence: true
 
