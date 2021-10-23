@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :redirect_if_current_user, only:
-
   def new
+    return redirect_to new_game_path if current_user
+
     @user = User.new
   end
 
@@ -23,10 +23,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def redirect_if_current_user
-    redirect_to new_game_path if current_user
-  end
 
   def user_params
     params.require(:user).permit(:name)
