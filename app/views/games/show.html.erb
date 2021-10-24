@@ -1,20 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="container mx-auto">
+  <div>
+    <h3><%= @game.name %></h3>
+    <hr>
+    <strong>Code:</strong>
+    <%= @game.code %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game.name %>
-</p>
+    <p id="notice"><%= notice %></p>
+    <strong>Invite people:</strong>
+    <%= link_to(game_url(@game.code), game_url(@game.code)) %>
+    <p class="mt-5"><%= link_to 'New game?', new_game_path %></p>
+    <p><%= link_to 'All Game Lists', games_path %></p>
+  </div>
 
-<p>
-  <strong>Code:</strong>
-  <%= @game.code %>
-</p>
-
-<p>
-  <strong>Share the link to invite people:</strong>
-  <%= link_to(game_url(@game.code), game_url(@game.code)) %>
-</p>
-
-<%= javascript_pack_tag 'games/main', 'data-turbolinks-track': 'reload' %>
-<div id="gameApp" data-user="<%= @user_data %>" data-game="<%= @game_data %>">
+  <%= javascript_pack_tag 'games/main', 'data-turbolinks-track': 'reload' %>
+  <div id="gameApp" data-user="<%= @user_data %>" data-game="<%= @game_data %>">
+  </div>
 </div>
