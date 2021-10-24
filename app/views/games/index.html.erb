@@ -10,14 +10,13 @@
       <tr>
         <th>Name</th>
         <th>URL</th>
-        <th></th>
       </tr>
     </thead>
     <% @games.each do |game| %>
     <tbody>
       <tr>
         <td><%= game.name %></td>
-        <td> <%= link_to(game_url(game.code), game_url(game.code)) %></td>
+        <td><%= link_to(game_url(game.code), game_url(game.code)) %></td>
       </tr>
     </tbody>
     <% end %>

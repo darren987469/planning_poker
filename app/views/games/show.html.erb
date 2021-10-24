@@ -9,6 +9,7 @@
     <strong>Invite people:</strong>
     <%= link_to(game_url(@game.code), game_url(@game.code)) %>
     <p class="mt-5"><%= link_to 'New game?', new_game_path %></p>
+    <p><%= link_to 'All Game Lists', games_path %></p>
   </div>
 
   <%= javascript_pack_tag 'games/main', 'data-turbolinks-track': 'reload' %>
