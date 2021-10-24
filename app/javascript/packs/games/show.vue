@@ -15,12 +15,14 @@
     <div>
       <button @click="sendUpdateGameEvent" class="ml-3 btn-pink">{{ getGameControlButtonName() }}</button>
     </div>
-
     <hr>
-    <div v-for="vote in game.votes" :key="vote.id" class="ml-3">
-      <td class="pr-3 pb-1">{{ vote.user.name }}</td>
+    <div class="row">
+    <div v-for="vote in game.votes" :key="vote.id" class="col-6">
+      <td class="pr-3">{{ vote.user.name }}</td>
       <td >{{ displayVote(vote) }}</td>
     </div>
+    </div>
+
 
   </div>
 </template>
@@ -73,11 +75,11 @@ export default {
           return '-'
         case 'voting':
           if(vote.value === null)
-            return 'picking the card...'
+            return 'Picking the card...'
           if(vote.user.id === this.user.id) {
             return vote.value
           } else {
-            return 'card picked'
+            return 'Card picked'
           }
         case 'voting_ended':
           if(vote.value === null)
@@ -90,11 +92,11 @@ export default {
     },
     displayVoteValue(value) {
       if(vote.value === null)
-        return 'picking the card...'
+        return 'Picking the card...'
       if(vote.user.id === this.user.id) {
         return vote.value
       } else {
-        return 'card picked'
+        return 'Card Picked'
       }
     },
     currentVote() {
