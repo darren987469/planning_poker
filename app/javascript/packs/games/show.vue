@@ -1,33 +1,28 @@
 <template>
-  <div>
-    <h3>Votes</h3>
-    <h3>Hi, {{user.name}}, user_id: {{user.id}}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Card</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="vote in game.votes" :key="vote.id">
-          <td>{{ vote.user.name }}</td>
-          <td>{{ displayVote(vote) }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="ml-3">
+    <p>Please click the number card and vote....</p>
 
-    <button
-      v-for="card in cards"
-      :key="card.title"
-      @click="sendUpdateVoteEvent(card.value)"
-      :disabled="game.status !== 'voting'">
-      {{ card.title }}
-    </button>
+    <div class="row ml-3">
+      <button
+        v-for="card in cards"
+        class="btn-border-pink col-3 mb-1"
+        :key="card.title"
+        @click="sendUpdateVoteEvent(card.value)"
+        :disabled="game.status !== 'voting'">
+        {{ card.title }}
+      </button>
+    </div>
 
     <div>
-      <button @click="sendUpdateGameEvent">{{ getGameControlButtonName() }}</button>
+      <button @click="sendUpdateGameEvent" class="ml-3 btn-pink">{{ getGameControlButtonName() }}</button>
     </div>
+
+    <hr>
+    <div v-for="vote in game.votes" :key="vote.id" class="ml-3">
+      <td class="pr-3 pb-1">{{ vote.user.name }}</td>
+      <td >{{ displayVote(vote) }}</td>
+    </div>
+
   </div>
 </template>
 
@@ -143,7 +138,7 @@ export default {
       }
     },
     getGameControlButtonName() {
-      return this.game.status === 'voting' ? 'Show cards' : 'Start new voting'
+      return this.game.status === 'voting' ? 'Show cards' : 'Vote Now'
     }
   }
 };

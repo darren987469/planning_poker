@@ -1,7 +1,7 @@
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this game from being saved:</h2>
+      <p><%= pluralize(user.errors.count, "error") %> prohibited this game from being saved:</p>
 
       <ul>
         <% user.errors.each do |error| %>
@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Your Name' %>
     <%= form.text_field :name %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn-border-pink" %>
   </div>
 <% end %>
