@@ -26,10 +26,16 @@
   border-color: #C33C58 !important ;
   border-width: 1px;
   margin-right: 11px;
-  &:hover {
+
+  &:hover:enabled{
   opacity:1;
   text-decoration: none;
   color:#C33C58;
+  }
+
+  &:disabled{
+  border-color: #cccccc !important ;
+  color:  #cccccc !important;
   }
 }
 

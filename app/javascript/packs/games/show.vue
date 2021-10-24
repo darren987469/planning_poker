@@ -1,27 +1,28 @@
 <template>
   <div class="ml-3">
-    <p>Please click the number card and vote....</p>
+    <div class="row ml-3" v-if="game.status == 'voting'">
+      <p>Please click the number card and vote....</p>
 
-    <div class="row ml-3">
-      <button
-        v-for="card in cards"
+      <p><button v-for="card in cards"
         class="btn-border-pink col-3 mb-1"
         :key="card.title"
-        @click="sendUpdateVoteEvent(card.value)"
-        :disabled="game.status !== 'voting'">
+        @click="sendUpdateVoteEvent(card.value)">
         {{ card.title }}
       </button>
+      </p>
     </div>
 
     <div>
       <button @click="sendUpdateGameEvent" class="ml-3 btn-pink">{{ getGameControlButtonName() }}</button>
     </div>
-
     <hr>
-    <div v-for="vote in game.votes" :key="vote.id" class="ml-3">
-      <td class="pr-3 pb-1">{{ vote.user.name }}</td>
+    <div class="row">
+    <div v-for="vote in game.votes" :key="vote.id" class="col-6">
+      <td class="pr-3">{{ vote.user.name }}</td>
       <td >{{ displayVote(vote) }}</td>
     </div>
+    </div>
+
 
   </div>
 </template>
@@ -74,11 +75,11 @@ export default {
           return '-'
         case 'voting':
           if(vote.value === null)
-            return 'picking the card...'
+            return 'Picking the card...'
           if(vote.user.id === this.user.id) {
             return vote.value
           } else {
-            return 'card picked'
+            return 'Card picked'
           }
         case 'voting_ended':
           if(vote.value === null)
@@ -91,11 +92,11 @@ export default {
     },
     displayVoteValue(value) {
       if(vote.value === null)
-        return 'picking the card...'
+        return 'Picking the card...'
       if(vote.user.id === this.user.id) {
         return vote.value
       } else {
-        return 'card picked'
+        return 'Card Picked'
       }
     },
     currentVote() {
@@ -138,7 +139,13 @@ export default {
       }
     },
     getGameControlButtonName() {
-      return this.game.status === 'voting' ? 'Show cards' : 'Vote Now'
+      if(this.game.status === 'voting')
+        return 'Show cards'
+      if(this.game.status === 'voting_ended') {
+        return 'Next Vote'
+      } else {
+        return 'Vote Now'
+      }
     }
   }
 };
