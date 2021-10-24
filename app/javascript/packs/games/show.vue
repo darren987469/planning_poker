@@ -1,16 +1,15 @@
 <template>
   <div class="ml-3">
-    <p>Please click the number card and vote....</p>
+    <div class="row ml-3" v-if="game.status == 'voting'">
+      <p>Please click the number card and vote....</p>
 
-    <div class="row ml-3">
-      <button
-        v-for="card in cards"
+      <p><button v-for="card in cards"
         class="btn-border-pink col-3 mb-1"
         :key="card.title"
-        @click="sendUpdateVoteEvent(card.value)"
-        :disabled="game.status !== 'voting'">
+        @click="sendUpdateVoteEvent(card.value)">
         {{ card.title }}
       </button>
+      </p>
     </div>
 
     <div>
@@ -138,7 +137,13 @@ export default {
       }
     },
     getGameControlButtonName() {
-      return this.game.status === 'voting' ? 'Show cards' : 'Vote Now'
+      if(this.game.status === 'voting')
+        return 'Show cards'
+      if(this.game.status === 'voting_ended') {
+        return 'Next Vote'
+      } else {
+        return 'Vote Now'
+      }
     }
   }
 };
