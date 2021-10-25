@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe '/users', type: :request do
   let(:user) { create(:user) }
   let(:game) { create(:game) }

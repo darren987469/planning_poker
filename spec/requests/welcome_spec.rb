@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe '/', type: :request do
   describe 'GET /' do
     context 'when there is a user session' do

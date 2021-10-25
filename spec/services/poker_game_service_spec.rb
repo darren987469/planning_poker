@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe PokerGameService do
   let(:user) { create(:user) }
   let(:game) { create(:game, status: 'voting') }

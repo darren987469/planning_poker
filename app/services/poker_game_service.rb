@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PokerGameService < BaseService
   attr_reader :event, :params, :game, :stream_key
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Game, type: :model do
   it 'generates code if not set' do
     game = create(:game)

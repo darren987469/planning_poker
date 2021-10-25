@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PokerChannel < ApplicationCable::Channel
   def subscribed
     event = {

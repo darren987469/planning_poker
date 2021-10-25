@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GamesController < ApplicationController
   before_action :redirect_unless_current_suer, only: %i[new create]
   before_action :set_game, only: %i[edit update destroy]
