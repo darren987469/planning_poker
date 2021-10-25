@@ -11,18 +11,7 @@ class PokerGameService < BaseService
   end
 
   def run
-    case event[:type]
-    when 'user_join'
-      handle_user_join_event
-    when 'user_leave'
-      handle_user_leave_event
-    when 'update_vote'
-      handle_update_vote_event
-    when 'update_game'
-      handle_update_game_event
-    else
-      raise 'Invalid type'
-    end
+    handle_event
 
     if errors.empty?
       data = { game: GameSerializer.new(@game).run }
@@ -35,6 +24,21 @@ class PokerGameService < BaseService
   end
 
   private
+
+  def handle_event
+    case event[:type]
+    when 'user_join'
+      handle_user_join_event
+    when 'user_leave'
+      handle_user_leave_event
+    when 'update_vote'
+      handle_update_vote_event
+    when 'update_game'
+      handle_update_game_event
+    else
+      raise 'Invalid type'
+    end
+  end
 
   def handle_user_join_event
     user = User.find(params.dig(:user, :id))
