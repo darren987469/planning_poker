@@ -1,4 +1,6 @@
-# README
+# Planning poker
+
+[![CircleCI](https://circleci.com/gh/darren987469/planning_poker/tree/master.svg?style=svg)](https://circleci.com/gh/darren987469/planning_poker/tree/master)
 
 Demo: https://glacial-castle-59975.herokuapp.com/
 
