@@ -1,3 +1,6 @@
+inherit_gem:
+  rubocop-discourse: default.yml
+
 # The behavior of RuboCop can be controlled via the .rubocop.yml
 # configuration file. It makes it possible to enable/disable
 # certain cops (checks) and to alter their behavior if they accept
@@ -24,10 +27,14 @@ Metrics/BlockLength:
 Style/Documentation:
   Enabled: false
 
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
 AllCops:
+  TargetRubyVersion: 2.7.4
   Exclude:
-    - config/initializers/simple_form_bootstrap.rb
-    - db/schema.rb
+    - 'vendor/**/*'
+    - db/**/*.rb
     - 'bin/*'
     - config/initializers/simple_form_bootstrap.rb
     - config/initializers/simple_form.rb
