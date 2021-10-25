@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 
     if @game.save
       session[:game_code] = @game.code
-      redirect_to game_url(@game.code), notice: "Game was successfully created."
+      redirect_to game_url(@game.code), notice: 'Game was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

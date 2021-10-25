@@ -5,9 +5,7 @@ class PokerChannel < ApplicationCable::Channel
       params: params
     }
     service = PokerGameService.new(event)
-    if service.run
-      stream_from(service.stream_key)
-    end
+    stream_from(service.stream_key) if service.run
   end
 
   def unsubscribed

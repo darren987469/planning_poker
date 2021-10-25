@@ -1,7 +1,7 @@
 describe '/users', type: :request do
   let(:user) { create(:user) }
   let(:game) { create(:game) }
-  let(:valid_attributes) { { name: 'name' }  }
+  let(:valid_attributes) { { name: 'name' } }
   let(:invalid_attributes) { { name: nil } }
 
   describe 'GET /new' do

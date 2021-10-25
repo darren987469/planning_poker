@@ -8,6 +8,6 @@ class CreateVotes < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :votes, [:game_id, :user_id], unique: true
+    add_index :votes, %i[game_id user_id], unique: true
   end
 end

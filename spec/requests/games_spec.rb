@@ -1,7 +1,7 @@
 describe '/games', type: :request do
   let(:user) { create(:user) }
   let(:game) { create(:game) }
-  let(:valid_attributes) { { name: 'name' }  }
+  let(:valid_attributes) { { name: 'name' } }
   let(:invalid_attributes) { { name: nil } }
 
   describe 'GET /index' do
@@ -50,9 +50,9 @@ describe '/games', type: :request do
       end
 
       it 'broadcasts to notify there is a new user join the game' do
-        expect {
+        expect do
           subject
-        }.to have_broadcasted_to("game_#{game.id}")
+        end.to have_broadcasted_to("game_#{game.id}")
       end
 
       context 'the user already has association with the game' do
